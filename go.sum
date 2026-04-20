@@ -172,8 +172,6 @@ github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd h1:TRLaZ9cD/w
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
 github.com/modern-go/reflect2 v1.0.2 h1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9Gz0M=
 github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjYzDa0/r8luk=
-github.com/pdcgo/schema v1.0.114 h1:5DDmJM4mtGaWt1q6fX7LRRCmqCi21YvT6tIAjE/tmcg=
-github.com/pdcgo/schema v1.0.114/go.mod h1:PFVdZ4apphj9eQ3JPMhf8plHqRn2gB9sOyCzy/Iz50M=
 github.com/pdcgo/schema v1.0.115 h1:WaUbC+4MXnAal64vR9b173eUCeMd+DjnGxrWtB1Lwkw=
 github.com/pdcgo/schema v1.0.115/go.mod h1:PFVdZ4apphj9eQ3JPMhf8plHqRn2gB9sOyCzy/Iz50M=
 github.com/pdcgo/shared v1.0.131 h1:eH4As1aTE/jLuZnKPE395lG5QONHaeTe4DXdbiw+nn0=
