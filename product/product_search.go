@@ -24,8 +24,12 @@ func (p *productSrvImpl) ProductSearch(
 
 	query := db.
 		Table("products p").
-		Where("p.team_id = ?", payload.TeamId).
 		Where("p.deleted != true")
+
+	if payload.TeamId != 0 {
+		query = query.
+			Where("p.team_id = ?", payload.TeamId)
+	}
 
 	switch search := payload.Search.(type) {
 	case *product_iface.ProductSearchRequest_Name:
