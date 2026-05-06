@@ -12,11 +12,6 @@ type productSrvImpl struct {
 	db *gorm.DB
 }
 
-// ProductByIDs implements product_ifaceconnect.ProductServiceHandler.
-func (p *productSrvImpl) ProductByIDs(context.Context, *connect.Request[product_iface.ProductByIDsRequest]) (*connect.Response[product_iface.ProductByIDsResponse], error) {
-	panic("unimplemented")
-}
-
 // ProductMapConnect implements product_ifaceconnect.ProductServiceHandler.
 func (p *productSrvImpl) ProductMapConnect(context.Context, *connect.Request[product_iface.ProductMapConnectRequest]) (*connect.Response[product_iface.ProductMapConnectResponse], error) {
 	panic("unimplemented")
