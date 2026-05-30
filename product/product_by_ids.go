@@ -33,6 +33,7 @@ func (p *productSrvImpl) ProductByIDs(
 			"p.name",
 			"p.ref_id",
 			"p.image ->>0 as image",
+			"p.team_id",
 		}).
 		Find(&products).
 		Error
