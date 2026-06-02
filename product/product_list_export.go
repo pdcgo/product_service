@@ -122,7 +122,11 @@ func (p *productSrvImpl) ProductListExport(
 	}
 
 	if pay.TeamId != 0 {
-		pquery = pquery.Where("p.team_id = ?", pay.TeamId)
+		if pay.ExcludeSelectedTeamId {
+			pquery = pquery.Where("p.team_id != ?", pay.TeamId)
+		} else {
+			pquery = pquery.Where("p.team_id = ?", pay.TeamId)
+		}
 	}
 
 	if pay.IsLocked {
