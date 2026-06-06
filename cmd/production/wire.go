@@ -10,9 +10,10 @@ import (
 	"github.com/pdcgo/product_service"
 	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/custom_connect"
+	"github.com/urfave/cli/v3"
 )
 
-func InitializeApp() (*App, error) {
+func InitializeApp() (*cli.Command, error) {
 	wire.Build(
 		http.NewServeMux,
 		configs.NewProductionConfig,
@@ -20,8 +21,10 @@ func InitializeApp() (*App, error) {
 		custom_connect.NewDefaultInterceptor,
 		custom_connect.NewRegisterReflect,
 		product_service.NewRegister,
+		NewServiceApiFunc,
+		// NewReindexFunc,
 		NewApp,
 	)
 
-	return &App{}, nil
+	return &cli.Command{}, nil
 }

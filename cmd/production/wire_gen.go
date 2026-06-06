@@ -10,12 +10,13 @@ import (
 	"github.com/pdcgo/product_service"
 	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/custom_connect"
+	"github.com/urfave/cli/v3"
 	"net/http"
 )
 
 // Injectors from wire.go:
 
-func InitializeApp() (*App, error) {
+func InitializeApp() (*cli.Command, error) {
 	serveMux := http.NewServeMux()
 	appConfig, err := configs.NewProductionConfig()
 	if err != nil {
@@ -31,6 +32,7 @@ func InitializeApp() (*App, error) {
 	}
 	registerHandler := product_service.NewRegister(serveMux, db, defaultInterceptor)
 	registerReflectFunc := custom_connect.NewRegisterReflect(serveMux)
-	app := NewApp(serveMux, registerHandler, registerReflectFunc)
-	return app, nil
+	serviceApiFunc := NewServiceApiFunc(serveMux, registerHandler, registerReflectFunc)
+	command := NewApp(serviceApiFunc)
+	return command, nil
 }

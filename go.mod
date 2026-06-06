@@ -5,8 +5,9 @@ go 1.24.2
 require (
 	connectrpc.com/connect v1.19.1
 	github.com/google/wire v0.7.0
-	github.com/pdcgo/schema v1.0.135
+	github.com/pdcgo/schema v1.0.137
 	github.com/pdcgo/shared v1.0.131
+	github.com/urfave/cli/v3 v3.7.0
 	golang.org/x/net v0.47.0
 	gorm.io/gorm v1.31.1
 )
