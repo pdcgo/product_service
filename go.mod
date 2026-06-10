@@ -1,14 +1,18 @@
 module github.com/pdcgo/product_service
 
-go 1.24.2
+go 1.25.0
 
 require (
-	connectrpc.com/connect v1.19.1
+	cloud.google.com/go/aiplatform v1.109.0
+	connectrpc.com/connect v1.19.2
 	github.com/google/wire v0.7.0
+	github.com/pdcgo/san_collection v1.0.3
 	github.com/pdcgo/schema v1.0.137
-	github.com/pdcgo/shared v1.0.131
+	github.com/pdcgo/shared v1.0.134
 	github.com/urfave/cli/v3 v3.7.0
-	golang.org/x/net v0.47.0
+	golang.org/x/net v0.53.0
+	google.golang.org/api v0.256.0
+	google.golang.org/protobuf v1.36.11
 	gorm.io/gorm v1.31.1
 )
 
@@ -16,10 +20,12 @@ require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1 // indirect
 	buf.build/go/protovalidate v1.0.1 // indirect
 	cel.dev/expr v0.25.1 // indirect
+	cloud.google.com/go v0.123.0 // indirect
 	cloud.google.com/go/auth v0.17.0 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.8 // indirect
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
 	cloud.google.com/go/iam v1.5.3 // indirect
+	cloud.google.com/go/longrunning v0.7.0 // indirect
 	cloud.google.com/go/secretmanager v1.16.0 // indirect
 	cloud.google.com/go/trace v1.11.7 // indirect
 	connectrpc.com/grpcreflect v1.3.0 // indirect
@@ -74,7 +80,7 @@ require (
 	github.com/stoewer/go-strcase v1.3.1 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.3.1 // indirect
-	github.com/wargasipil/data_processing v0.0.0-20260316040652-88b05c127457 // indirect
+	github.com/wargasipil/data_processing v0.0.0-20260420085126-0b978af04e6f // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.63.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.63.0 // indirect
@@ -87,21 +93,19 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.1 // indirect
 	golang.org/x/arch v0.23.0 // indirect
-	golang.org/x/crypto v0.45.0 // indirect
+	golang.org/x/crypto v0.50.0 // indirect
 	golang.org/x/exp v0.0.0-20251125195548-87e1e737ad39 // indirect
-	golang.org/x/mod v0.30.0 // indirect
-	golang.org/x/oauth2 v0.33.0 // indirect
-	golang.org/x/sync v0.18.0 // indirect
-	golang.org/x/sys v0.38.0 // indirect
-	golang.org/x/text v0.31.0 // indirect
+	golang.org/x/mod v0.34.0 // indirect
+	golang.org/x/oauth2 v0.35.0 // indirect
+	golang.org/x/sync v0.20.0 // indirect
+	golang.org/x/sys v0.43.0 // indirect
+	golang.org/x/text v0.36.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
-	golang.org/x/tools v0.39.0 // indirect
-	google.golang.org/api v0.256.0 // indirect
+	golang.org/x/tools v0.43.0 // indirect
 	google.golang.org/genproto v0.0.0-20251124214823-79d6a2a48846 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20251124214823-79d6a2a48846 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251124214823-79d6a2a48846 // indirect
 	google.golang.org/grpc v1.77.0 // indirect
-	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/datatypes v1.2.7 // indirect
 	gorm.io/driver/mysql v1.6.0 // indirect
