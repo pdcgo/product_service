@@ -26,11 +26,12 @@ func InitializeApp() (*cli.Command, error) {
 	if err != nil {
 		return nil, err
 	}
+	cacheManager := NewCacheManager()
 	defaultInterceptor, err := custom_connect.NewDefaultInterceptor()
 	if err != nil {
 		return nil, err
 	}
-	registerHandler := product_service.NewRegister(serveMux, db, defaultInterceptor)
+	registerHandler := product_service.NewRegister(serveMux, db, appConfig, cacheManager, defaultInterceptor)
 	registerReflectFunc := custom_connect.NewRegisterReflect(serveMux)
 	serviceApiFunc := NewServiceApiFunc(serveMux, registerHandler, registerReflectFunc)
 	command := NewApp(serviceApiFunc)

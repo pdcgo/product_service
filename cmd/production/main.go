@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 
+	"github.com/pdcgo/san_collection/san_caches"
 	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/db_connect"
 	"github.com/pdcgo/shared/pkg/cloud_logging"
@@ -13,6 +14,12 @@ import (
 
 func NewDatabase(cfg *configs.AppConfig) (*gorm.DB, error) {
 	return db_connect.NewProductionDatabase("product_service", &cfg.Database)
+}
+
+// NewCacheManager backs the v2 access interceptor's role cache. Skip-cache (no Redis)
+// mirrors the development omnibus; every role lookup hits the DB.
+func NewCacheManager() san_caches.CacheManager {
+	return san_caches.NewSkipCacheManager()
 }
 
 func NewApp(

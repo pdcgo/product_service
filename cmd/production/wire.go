@@ -18,6 +18,7 @@ func InitializeApp() (*cli.Command, error) {
 		http.NewServeMux,
 		configs.NewProductionConfig,
 		NewDatabase,
+		NewCacheManager,
 		custom_connect.NewDefaultInterceptor,
 		custom_connect.NewRegisterReflect,
 		product_service.NewRegister,
