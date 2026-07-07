@@ -6,9 +6,12 @@ Status for this development is still in progress and not completely take over le
 
 1. for database schema related, read this [Database Schema](database-schema.md).
 2. for testing that should cover and documentation about testing read this [Testing](test.md).
+3. this service also follow protobuf guideline of this. [Warehouse Infra Proto Guideline](../../docs/proto-guideline.md)
 
-## Authentication & Authorization
-1. Use v2 roling system. not legacy system
+## Authentication & Authorization.
+1. Use v2 roling system. not legacy system. for complete reference read [this](../../user_service/docs/readme.md#authentication--authorization)
+2. use interceptor that live in [here](../../user_service/access_interceptors/interceptor.go)
+3. DON'T use legacy interface on [this](../../shared/interfaces/authorization_iface/authorization.go)
 
 Implemented via the **v2 access interceptor** (`user_service/access_interceptors.NewAccessInterceptor`), attached to
 both `ProductService` and `CategoryService` in `register.go`. Each request message declares a
@@ -19,7 +22,7 @@ the Category RPCs are `allow_only_authenticated` (global master data); the pre-e
 Tightening the writes to **specific roles** (e.g. selling OWNER/ADMIN/CS, ADMIN for category management) is the
 deferred "Review Role authorization" item below.
 
-## Connect RPC Spec
+## Connect RPC Spec.
 `ProductService` heavyly depend `connect-rpc` to serve and creating apis and grpc. Why we use `connectrpc` because its can be two mode as pure grpc and grpc-web that interact like web. And also supported http2. This service have several rpc:
 
 1. Product Management Related RPC (implemented — CRUD over the legacy `products` table)
@@ -35,7 +38,16 @@ deferred "Review Role authorization" item below.
     `product/product_{create,update,delete,list,detail}.go`, backed by the `product_models.Product` model and the
     `db_migrations/00001_create_products.sql` legacy-compat migration.
 
-2. Category Management Related RPC
+2. Product List for Fastest Ops RPC.<br>
+    This rpc use for components that need load Product list fast. for example product picker component in frontend.
+    1. this rpc named `ProductListSearch`.
+
+3. Product Data By IDs RPC.<br>
+    This rpc use for getting product data by ids.
+    1. this rpc named `ProductByIds`.
+
+
+3. Category Management Related RPC
     - Create Category that named `CategoryCreate`
     - Delete Category that named `CategoryDelete`
     - List Category that named `CategoryList`
@@ -43,6 +55,17 @@ deferred "Review Role authorization" item below.
     
 
 ### Product Management RPC
+
+## Product List for Fastest Ops RPC.
+1. the product can be search by:
+    - team id
+    - product name
+    - product code
+
+
+## Product Data By IDs RPC
+1. this rpc follow guideline [this](../../docs/proto-guideline.md#rule-rpc-that-load-data-by-ids).
+
 
 
 ### Category Management RPC

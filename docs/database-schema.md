@@ -6,7 +6,7 @@ Schema and Model that have :
 
 ## Category Schema
 1. Legacy compatibility
-    Because Category Schema is exist in legacy system before. we must aware about the migration. in new migration this project, create rack **If Only** that table is not exist.
+    Because Category Schema is exist in legacy system before. we must aware about the migration. in new migration this project, create category **If Only** that table is not exist.
 2. This is legacy golang struct that reflected the schema. for now, the field and schema already accomodate this system. No need to change.
     ```
     type Category struct {
@@ -29,7 +29,7 @@ Schema and Model that have :
 
 ## Product Schema
 1. Legacy compatibility
-    Because Product Schema is exist in legacy system before. we must aware about the migration. in new migration this project, create rack **If Only** that table is not exist.
+    Because Product Schema is exist in legacy system before. we must aware about the migration. in new migration this project, create category **If Only** that table is not exist.
 2. This is legacy golang struct that reflected the schema. for now, the field and schema already accomodate this system. No need to change.
     ```
     type Product struct {

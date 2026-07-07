@@ -34,16 +34,28 @@ Legend: ✅ covered · ⏳ deferred (tracked in §3) · ⚠ known gap / caveat.
 6. **ProductList** (`product_list_test.go`)
     - ✅ team-scoped, newest-first, excludes deleted + other teams; name search; pagination;
       validation.
-7. **ProductByIDs** (`product_by_ids_test.go`)
-    - ✅ maps the requested ids → product data (`image ->> 0`, `team_id`).
-    - ⚠ by design **no team-scope** and **no soft-delete filter** — it is an explicit id lookup
-      (e.g. resolving products for historical orders). Pinned by a test, not a bug.
-8. **ProductSearch** (`product_search_test.go`)
+7. **ProductByIDs** (`product_by_ids_test.go`) — follows the **by-IDs guideline**
+   (`docs/proto-guideline.md`): `filter{ids, team_id}` + `data_request` → `map<product_id, ItemList>`
+   with one oneof item per requested type.
+    - ✅ maps the requested ids with one item per requested type in `data_request` order
+      (GENERAL: name/ref_id/`image ->> 0`; TEAM: team_id/team_name).
+    - ✅ `data_request` selection returns only the requested types.
+    - ✅ optional `team_id` scope filters other teams' ids.
+    - ✅ **no soft-delete filter by design** — explicit id lookup (e.g. resolving products for
+      historical orders); a deleted product is still returned. Pinned by a test, not a bug.
+    - ✅ validation — missing `filter.ids` / empty `data_request` → `InvalidArgument`.
+8. **ProductListSearch** (`product_list_search_test.go`) — the "Fastest Ops" picker search.
+    - ✅ one `q` matches product name **or** product code (`ref_id`), ILIKE; team-scoped (required
+      `team_id`, other teams excluded); `image ->> 0`.
+    - ✅ empty `q` lists the team's newest products first; excludes `deleted=true`.
+    - ✅ limit: default 25 when 0 (never returns zero rows for `Limit=0`), capped at 100.
+    - ✅ validation — `team_id=0` → `InvalidArgument`.
+9. **ProductSearch** (`product_search_test.go`)
     - ✅ by name / by ref_id (the request `search` oneof); team scope; excludes deleted; limit caps.
     - ⚠ `limit` is applied unconditionally, so a request with `Limit=0` returns nothing — always
       pass a positive limit.
-9. **ProductListExport** — ⏳ deferred (server-stream CSV + order/revenue aggregation).
-10. **ProductDuplicate** — ⏳ deferred (handler is an unimplemented stub).
+10. **ProductListExport** — ⏳ deferred (server-stream CSV + order/revenue aggregation).
+11. **ProductDuplicate** — ⏳ deferred (handler is an unimplemented stub).
 
 ### Category Related
 1. **CategoryCreate** (`category_create_test.go`) — ✅ root (level 0) + child (`parent.level+1`);
@@ -84,6 +96,7 @@ Legend: ✅ covered · ⏳ deferred (tracked in §3) · ⚠ known gap / caveat.
 - **ProductListExport** — no test yet (streaming CSV + aggregation across
   order_items / products / teams).
 - **ProductDuplicate** — unimplemented stub; implement and test together.
-- **ProductByIDs / ProductSearch** — intentionally skip team-scoping (id / keyword lookups);
-  ProductByIDs also skips the soft-delete filter. The behavior is pinned by tests, not "fixed."
+- **ProductSearch** — intentionally skips team-scoping unless the optional filter is set
+  (keyword lookup). **ProductByIDs** now has an optional `team_id` scope (by-IDs guideline) but
+  still skips the soft-delete filter by design. Both behaviors are pinned by tests, not "fixed."
 - **ProductSearch `Limit`** — applied unconditionally (`Limit=0` ⇒ no rows). Candidate cleanup.
