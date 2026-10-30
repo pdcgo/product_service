@@ -79,7 +79,7 @@ func (p *productSrvImpl) ProductListExport(
 			"count(distinct o.team_id) as team_count",
 			"count(distinct o.order_mp_id) as shop_count",
 			"count(distinct oi.order_id) as order_count",
-			"count(oi.count) as piece_count",
+			"sum(oi.count) as piece_count",
 			"sum(oi.total) as revenue_amount",
 		}).
 		Where("o.status != ?", db_models.OrdCancel).
